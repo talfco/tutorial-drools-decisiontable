@@ -5,71 +5,64 @@ import java.util.List;
 
 public class Customer {
 
-    private CustomerType type;
-
-    private CustomerOccupation occupation = CustomerOccupation.NONE;
-
-    private int years;
-
-    private int discount;
-    
+    private CustomerLifeStage lifestage;
+    private CustomerAssets assets;
     private List<CustomerNeed> customerNeeds = new ArrayList<>();
 
-    public Customer(CustomerType type, int numOfYears) {
-        super();
-        this.type = type;
-        this.years = numOfYears;
+    public Customer() {
+        super();   
     }
 
-    public CustomerType getType() {
-        return type;
+    public void setLifeStage(CustomerLifeStage lifestage) {
+
+        this.lifestage = lifestage;
     }
 
-    public void setType(CustomerType type) {
-        this.type = type;
-    }
+    public CustomerLifeStage getLifeStage() {
 
-    public int getYears() {
-        return years;
-    }
-
-    public List<CustomerNeed> getNeeds() {
-
-        return customerNeeds;
-    }
-
-    public void setYears(int years) {
-        this.years = years;
-    }
-
-    public int getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(int discount) {
-        this.discount = discount;
+        return lifestage;
     }
 
     public void addNeed(CustomerNeed need) {
+
         customerNeeds.add(need);
     }
 
-    public enum CustomerType {
-        INDIVIDUAL, BUSINESS
+    public List<CustomerNeed> getNeeds() {
+        return customerNeeds;
+    }
+
+    public void setAssets(CustomerAssets assets) {
+        this.assets = assets;
+    }
+
+    public CustomerAssets getAssets() {
+        return assets;
     }
 
     public enum CustomerNeed {
-        MONEYABROAD, EBANKING, CASH, SECURITIES
+        SAVINGACCOUNT,
+        LIFEINSURANCE,
+        DIGITALBANKING,
+        STUDENTLOAN,
+        MORTAGE
     }
 
-    public enum CustomerOccupation {
-        HIGHSCHOOLER,
-        APPRENTICE,
-        STUDENT,
-        YOUNGPROFESSIONAL,
-        EMPLOYED,
-        UNEMPLOYED,
-        RETIRED,
-        NONE
+    // https://www.peoples-ebank.com/lifestages.html
+    public enum CustomerLifeStage {
+        GETTINGSTARTED,
+        CAREERFOCUSED,
+        ADVICEFAMILY,
+        EMPTYNESTER,
+        GOLDENYEARS,
+        BUSINESS
     }
+
+    public enum CustomerAssets {
+        TO50K,
+        FROM50KTO150K,
+        FROM150KTO300K,
+        OVER300K
+    }
+
 }

@@ -11,7 +11,6 @@ import org.kie.internal.io.ResourceFactory;
 
 import net.cloudburo.drools.config.DroolsBeanFactory;
 import net.cloudburo.drools.model.Customer;
-import net.cloudburo.drools.model.Customer.CustomerType;
 
 public class DiscountExcelIntegrationTest {
 
@@ -26,38 +25,21 @@ public class DiscountExcelIntegrationTest {
 
     @Test
     public void giveIndvidualLongStanding_whenFireRule_thenCorrectDiscount() throws Exception {
-        Customer customer = new Customer(CustomerType.INDIVIDUAL, 5);
-        customer.addNeed(Customer.CustomerNeed.EBANKING);
-        customer.addNeed(Customer.CustomerNeed.CASH);
+        // Add a Customer with its personal data and needs, used for the LHS Decision
+        Customer customer = new Customer();
+        customer.setLifeStage(Customer.CustomerLifeStage.CAREERFOCUSED);
+        customer.setAssets(Customer.CustomerAssets.FROM150KTO300K);
+        customer.addNeed(Customer.CustomerNeed.DIGITALBANKING);
+        customer.addNeed(Customer.CustomerNeed.SAVINGACCOUNT);
+        customer.addNeed(Customer.CustomerNeed.MORTAGE);
         kSession.insert(customer);
-
+        // Now we add the global variable which we use to communicate back our
         Offer offer = new Offer();
-        kSession.insert(offer);
-
+        kSession.setGlobal("offer", offer);
         kSession.fireAllRules();
 
-        assertEquals(customer.getDiscount(), 15);
+        //assertEquals(customer.getDiscount(), 15);
     }
 
-    @Test
-    public void giveIndvidualRecent_whenFireRule_thenCorrectDiscount() throws Exception {
-
-        Customer customer = new Customer(CustomerType.INDIVIDUAL, 1);
-        kSession.insert(customer);
-
-        kSession.fireAllRules();
-
-        assertEquals(customer.getDiscount(), 5);
-    }
-
-    @Test
-    public void giveBusinessAny_whenFireRule_thenCorrectDiscount() throws Exception {
-        Customer customer = new Customer(CustomerType.BUSINESS, 0);
-        kSession.insert(customer);
-
-        kSession.fireAllRules();
-
-        assertEquals(customer.getDiscount(), 20);
-    }
 
 }
