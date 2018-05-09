@@ -29,7 +29,7 @@ public class DiscountExcelIntegrationTest {
         Customer customer = new Customer();
         customer.setLifeStage(Customer.CustomerLifeStage.CAREERFOCUSED);
         customer.setAssets(Customer.CustomerAssets.FROM150KTO300K);
-        customer.addNeed(Customer.CustomerNeed.DIGITALBANKING);
+        customer.addNeed(Customer.CustomerNeed.LIFEINSURANCE);
         customer.addNeed(Customer.CustomerNeed.SAVINGACCOUNT);
         customer.addNeed(Customer.CustomerNeed.MORTAGE);
         kSession.insert(customer);
@@ -37,8 +37,9 @@ public class DiscountExcelIntegrationTest {
         Offer offer = new Offer();
         kSession.setGlobal("offer", offer);
         kSession.fireAllRules();
-
-        //assertEquals(customer.getDiscount(), 15);
+        assertEquals(offer.getDiscount(), 10);
+        assertEquals(offer.getFinancialPackage(), Offer.ProductPackage.CAREERFOCUSED_PACKAGE);
+        assertEquals(offer.getProducts().size(),2);
     }
 
 
