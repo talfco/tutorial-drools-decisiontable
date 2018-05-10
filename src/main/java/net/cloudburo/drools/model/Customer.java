@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Customer {
-
     private CustomerLifeStage lifestage;
     private CustomerAssets assets;
     private List<CustomerNeed> customerNeeds = new ArrayList<>();
