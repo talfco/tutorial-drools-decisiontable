@@ -94,7 +94,7 @@
         <http-component-version>4.4.6</http-component-version>
         <drools-version>7.4.1.Final</drools-version>
         <apache-poi-version>3.13</apache-poi-version>
-        <spring-core.version>4.3.6.RELEASE</spring-core.version>
+        <spring-core.version>4.3.18</spring-core.version>
         <junit.version>4.12</junit.version>
         <org.slf4j.version>1.7.21</org.slf4j.version>
         <logback.version>1.1.7</logback.version>
